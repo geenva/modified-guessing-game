@@ -74,7 +74,7 @@ fn guessing_game(dev: bool) {
         match guess.cmp(&num) {
             Ordering::Less => println!("Too small! Your guess is {}.", &guess),
             Ordering::Equal => {
-                println!("Equal! You win! Your guess is {}.", &guess);
+                green_ln!("Equal! You win! Your guess is {}.", &guess);
                 break;
             }
             Ordering::Greater => println!("Too big! Your guess is {}.", &guess),
