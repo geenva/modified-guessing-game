@@ -17,7 +17,7 @@ fn main() {
     }
 
     // skip dev-mode if vector is empty
-    if args.len() == 0 {
+    if args.is_empty() {
         guessing_game(false);
     } else {
         // enable dev mode if args[0] = dev
@@ -34,7 +34,7 @@ fn guessing_game(dev: bool) {
     let num = rand::thread_rng().gen_range(1..10);
 
     // check if developer mode is on from function arguments
-    if dev == true {
+    if dev {
         yellow_ln!("Developer mode on. Proceeding...");
         yellow_ln!("The number is {}.", &num);
     }
@@ -68,7 +68,7 @@ fn guessing_game(dev: bool) {
         };
 
         // remove one try
-        times = times - 1;
+        times -= 1;
 
         // match guess with number
         match guess.cmp(&num) {
