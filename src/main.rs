@@ -2,6 +2,8 @@ use rand::Rng;
 use std::cmp::Ordering;
 use std::env;
 use std::io;
+#[macro_use]
+extern crate colour;
 
 fn main() {
     println!("Welcome to the Guessing Game.");
@@ -25,19 +27,30 @@ fn guessing_game(dev: bool) {
     let num = rand::thread_rng().gen_range(1..10);
 
     if dev == true {
-        println!("WARN: DEVELOPER MODE ON.");
-        println!("The number is {}.", &num)
+        yellow_ln!("Developer mode on. Proceeding...");
+        yellow_ln!("The number is {}.", &num);
     }
 
+    let mut times = 3;
+
     loop {
+        if times == 0 {
+            red_ln!("😢 You ran out of tries. Try again!")
+        }
+
         let mut guess = String::new();
-        println!("Enter your guess... ");
+        blue_ln!("Enter your guess... ");
 
         io::stdin()
             .read_line(&mut guess)
             .expect("Failed to read line.");
 
-        let guess: u32 = guess.trim().parse().expect("Please type a number.");
+        let guess: u32 = match guess.trim().parse() {
+            Ok(num) => num,
+            Err(_) => continue,
+        };
+
+        times = times - 1;
 
         match guess.cmp(&num) {
             Ordering::Less => println!("Too small! Your guess is {}.", &guess),
