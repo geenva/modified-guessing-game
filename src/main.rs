@@ -6,7 +6,7 @@ use std::io;
 extern crate colour;
 
 fn main() {
-    println!("Welcome to the Guessing Game.");
+    println!("Welcome to the Guessing Game - guess a number between 1-10!");
 
     // init vector for argument parsing
     let mut args: Vec<String> = Vec::new();
