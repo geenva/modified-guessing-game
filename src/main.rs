@@ -46,7 +46,7 @@ fn guessing_game(dev: bool) {
     loop {
         // check if times are over
         if times == 0 {
-            red_ln!("😢 You ran out of tries. Try again!");
+            red_ln!("😢 You ran out of tries. The number was {}. Try again!", num);
             break;
         }
 
