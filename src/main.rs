@@ -10,12 +10,15 @@ fn main() {
         args.push(i)
     }
 
-    if args[0] == "dev" {
-        guessing_game(true);
-    } else {
+    if args.len() == 0 {
         guessing_game(false);
+    } else {
+        if args[0] == "dev" {
+            guessing_game(true);
+        } else {
+            guessing_game(false);
+        }
     }
-
 }
 
 fn guessing_game(dev: bool) {
