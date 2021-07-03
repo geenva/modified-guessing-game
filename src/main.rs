@@ -8,13 +8,8 @@ extern crate colour;
 fn main() {
     println!("Welcome to the Guessing Game - guess a number between 1-10!");
 
-    // init vector for argument parsing
-    let mut args: Vec<String> = Vec::new();
-
-    // loop over arguments, skipping file name entry
-    for i in env::args().skip(1) {
-        args.push(i)
-    }
+    // collect cli arguments
+    let args: Vec<String> = env::args().skip(1).collect();
 
     // skip dev-mode if vector is empty
     if args.is_empty() {
@@ -42,11 +37,14 @@ fn guessing_game(dev: bool) {
     // initialise times variable
     let mut times = 3;
 
-    // loop starts 
+    // loop starts
     loop {
         // check if times are over
         if times == 0 {
-            red_ln!("😢 You ran out of tries. The number was {}. Try again!", num);
+            red_ln!(
+                "😢 You ran out of tries. The number was {}. Try again!",
+                num
+            );
             break;
         }
 
@@ -61,10 +59,10 @@ fn guessing_game(dev: bool) {
         // convert guess to u32 and check if it is valid number
         let guess: u32 = match guess.trim().parse() {
             Ok(num) => num,
-            Err(_) => { 
+            Err(_) => {
                 red_ln!("Please enter a number.");
                 continue;
-            },
+            }
         };
 
         // remove one try
