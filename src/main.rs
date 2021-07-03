@@ -2,6 +2,7 @@ use rand::Rng;
 use std::cmp::Ordering;
 use std::env;
 use std::io;
+use std::process;
 #[macro_use]
 extern crate colour;
 
@@ -66,12 +67,12 @@ fn guessing_game(dev: bool) {
             Ordering::Less => println!("Too small! Your guess is {}.", &guess),
             Ordering::Equal => {
                 green_ln!("Equal! You won!");
-                break;
+                process::exit(0)
             }
             Ordering::Greater => println!("Too big! Your guess is {}.", &guess),
         }
     }
-    
+
     red_ln!(
         "😢 You ran out of tries. The number was {}. Try again!",
         num
